@@ -9,3 +9,4 @@ The objective is to create a mobile application with React Native and EXPO frame
 |date|time|total|activity|Next|
 |:----:|:----:|:----:|:----:|:----:|
 |23.5.|2|2|Start finally the React native /EXPO project for visualizing the Energy meter data|kick-start the project and implement first barchart with mock data|
+|25.5.|6|8|First bargraph on hourly data! Had to change from using the Victory package, as I did not get it working with React-native and EXPO. Now using react-native-chart-kit.|A lot of chart configuration and theming to be done. |
