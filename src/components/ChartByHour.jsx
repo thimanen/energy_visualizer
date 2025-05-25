@@ -1,5 +1,7 @@
 // example energy data from 23.5.
 
+import { useState } from 'react'
+
 const hourlyData = [
   {
     total_act_energy: 1132.6395,
@@ -386,3 +388,7 @@ const hourlyData = [
     timestamp: '2025-05-23T20:00:00.000Z',
   },
 ]
+
+const [energyData, setEnergyData] = useState([])
+
+
