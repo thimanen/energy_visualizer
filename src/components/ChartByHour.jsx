@@ -1,8 +1,9 @@
 // example energy data from 23.5.
 
-import { useState, useEffect } from 'react'
-import { Text, View } from 'react-native'
+import React, { useState, useEffect } from 'react'
+import { Text, View, Dimensions } from 'react-native'
 import { DateTime } from 'luxon'
+import { BarChart, StackedBarChart } from 'react-native-chart-kit'
 import computeEnergyFlows from '../utils/energyCalculator'
 
 const hourlyData = [
@@ -404,12 +405,45 @@ const ChartByHour = () => {
       ...item,
       hour: DateTime.fromISO(item.timestamp).toLocal().toFormat('HH'),
     }))
-    setEnergyData(energyFlow)
+    setEnergyData(energyFlowPerLocalHour)
   }, [hourlyData])
+
+  const screenWidth = Dimensions.get('window').width
+  const labels = energyData.map((item) => item.hour)
+  const dataPoints = energyData.map((item) => [
+    item.solarProduced,
+    item.mainsBought,
+    item.totalConsumption,
+    item.netFlow,
+  ])
+
+  const barChartData = {
+    labels,
+    legend: ['Solar Produced', 'Mains Bought', 'Total Consumption', 'Net Flow'],
+    data: dataPoints,
+    barColors: ['#fbc531', '#273c75', '#4cd137', '#44bd32'],
+  }
+
+  const chartConfig = {
+    backgroundGradientFrom: '#fff',
+    backgroundGradientTo: '#fff',
+    decimalPlaces: 1,
+    color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+    labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+    style: {
+      borderRadius: 16,
+    },
+  }
 
   return (
     <View>
       <Text>Chart would be here</Text>
+      <StackedBarChart
+        data={barChartData}
+        width={screenWidth - 16}
+        height={300}
+        chartConfig={chartConfig}
+      />
     </View>
   )
 }
