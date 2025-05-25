@@ -1,6 +1,9 @@
 // example energy data from 23.5.
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { Text, View } from 'react-native'
+import { DateTime } from 'luxon'
+import computeEnergyFlows from '../utils/energyCalculator'
 
 const hourlyData = [
   {
@@ -389,6 +392,26 @@ const hourlyData = [
   },
 ]
 
-const [energyData, setEnergyData] = useState([])
+const ChartByHour = () => {
+  const [energyData, setEnergyData] = useState([])
 
+  const solarData = hourlyData.filter((s) => s.source === 'solar')
+  const mainsData = hourlyData.filter((m) => m.source === 'mains')
 
+  useEffect(() => {
+    const energyFlow = computeEnergyFlows(mainsData, solarData)
+    const energyFlowPerLocalHour = energyFlow.map((item) => ({
+      ...item,
+      hour: DateTime.fromISO(item.timestamp).toLocal().toFormat('HH'),
+    }))
+    setEnergyData(energyFlow)
+  }, [hourlyData])
+
+  return (
+    <View>
+      <Text>Chart would be here</Text>
+    </View>
+  )
+}
+
+export default ChartByHour
