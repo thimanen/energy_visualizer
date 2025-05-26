@@ -411,39 +411,92 @@ const ChartByHour = () => {
   const screenWidth = Dimensions.get('window').width
   const labels = energyData.map((item) => item.hour)
   const dataPoints = energyData.map((item) => [
-    item.solarProduced,
+    item.solarUsed,
     item.mainsBought,
-    item.totalConsumption,
-    item.netFlow,
+    item.solarSold,
   ])
 
   const barChartData = {
     labels,
-    legend: ['Solar Produced', 'Mains Bought', 'Total Consumption', 'Net Flow'],
+    legend: [],
     data: dataPoints,
-    barColors: ['#fbc531', '#273c75', '#4cd137', '#44bd32'],
+    barColors: ['#fbc531', '#273c75', '#4cd137'],
   }
 
   const chartConfig = {
     backgroundGradientFrom: '#fff',
     backgroundGradientTo: '#fff',
     decimalPlaces: 1,
-    color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
-    labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+    barPercentage: 0.3,
+
+    color: (opacity = 1) => `rgba(233, 30, 99, ${opacity})`,
+    labelColor: (opacity = 1) => `rgba(33, 33, 33, ${opacity})`,
+
     style: {
       borderRadius: 16,
+      elevation: 4,
+      shadowColor: '#000',
+      shadowOffset: { width: 0, height: 2 },
+      shadowOpacity: 0.1,
+      shadowRadius: 4,
+    },
+    propsForBackgroundLines: {
+      stroke: '#e0e0e0', // light gray grid lines (Material Gray 300)
+      strokeDasharray: '',
+    },
+
+    propsForLabels: {
+      fontSize: 12,
+      fontWeight: '500',
     },
   }
 
   return (
     <View>
-      <Text>Chart would be here</Text>
-      <StackedBarChart
-        data={barChartData}
-        width={screenWidth - 16}
-        height={300}
-        chartConfig={chartConfig}
-      />
+      <View>
+        <Text>Chart would be here</Text>
+        <StackedBarChart
+          data={barChartData}
+          width={screenWidth - 16}
+          height={300}
+          chartConfig={chartConfig}
+          showBarTops={false}
+          showLegend={false}
+          style={{
+            borderRadius: 16,
+          }}
+        />
+      </View>
+
+      <View
+        style={{
+          flexDirection: 'row',
+          justifyContent: 'center',
+          flexWrap: 'wrap',
+        }}
+      >
+        {['Solar Used', 'Mains Bought', 'Solar Sold'].map((label, index) => (
+          <View
+            key={index}
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              marginHorizontal: 8,
+              marginVertical: 4,
+            }}
+          >
+            <View
+              style={{
+                width: 12,
+                height: 12,
+                backgroundColor: barChartData.barColors[index],
+                marginRight: 4,
+              }}
+            />
+            <Text style={{ fontSize: 12 }}>{label}</Text>
+          </View>
+        ))}
+      </View>
     </View>
   )
 }
