@@ -5,6 +5,7 @@ import { Text, View, Dimensions } from 'react-native'
 import { DateTime } from 'luxon'
 import computeEnergyFlows from '../utils/energyCalculator'
 import { BarChart } from 'react-native-gifted-charts'
+import theme from '../theme'
 
 const hourlyData = [
   {
@@ -395,14 +396,25 @@ const hourlyData = [
 
 // format the enerData to be compatible with StackedBarChart
 const formatEnergyDataForStackedChart = (data) => {
-  return data.map((reading) => ({
-    label: reading.hour,
-    stacks: [
-      { value: reading.solarUsed, color: '#4cd137' },
-      { value: reading.mainsBought, color: '#273c75' },
-      { value: -1 * reading.solarSold, color: '#e84118' },
-    ],
-  }))
+  const formattedData = []
+  for (let i = 0; i < data.length; i++) {
+    const reading = data[i]
+    // Start showing from 01.00 till 24.00 (00.00)
+    let hour = parseInt(reading.hour) % 24
+    // Show only every other label
+    const showLabel = hour % 2 === 0
+    const label = showLabel ? String(hour) : ''
+
+    formattedData.push({
+      label,
+      stacks: [
+        { value: reading.solarUsed, color: theme.chartColors.solarUsed },
+        { value: reading.mainsBought, color: theme.chartColors.mainsBought },
+        { value: -1 * reading.solarSold, color: theme.chartColors.solarSold },
+      ],
+    })
+  }
+  return formattedData
 }
 
 const ChartByHour = () => {
@@ -427,14 +439,20 @@ const ChartByHour = () => {
     <View>
       <BarChart
         stackData={energyData}
-        width={Dimensions.get('window').width - 32}
-        barWidth={20}
+        width={Dimensions.get('window').width - 10}
+        barWidth={11}
+        initialSpacing={10}
+        spacing={5}
         barBorderRadius={4}
-        frontColor="lightgray"
-        yAxisLabelTexts={['-50', '-25', '0', '25', '50']} // optional
-        yAxisTextStyle={{ color: '#333' }}
-        xAxisLabelTextStyle={{ color: '#333' }}
+        backgroundColor={theme.chartColors.backgroundColor}
+        yAxisTextStyle={{ color: theme.chartColors.labelColor, fontSize: 10 }}
+        xAxisLabelTextStyle={{
+          color: theme.chartColors.labelColor,
+          fontSize: 10,
+        }}
         isAnimated
+        noOfSections={6}
+        labelsDistanceFromXaxis={10}
       />
     </View>
   )
