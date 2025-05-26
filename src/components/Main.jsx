@@ -1,5 +1,6 @@
 import Constants from 'expo-constants'
 import { Text, StyleSheet, View } from 'react-native'
+import Title from './Title'
 import ChartByHour from './ChartByHour'
 
 const styles = StyleSheet.create({
@@ -13,7 +14,7 @@ const styles = StyleSheet.create({
 const Main = () => {
   return (
     <View style={styles.container}>
-      <Text>Energy Flow Visualizer</Text>
+      <Title />
       <ChartByHour />
     </View>
   )

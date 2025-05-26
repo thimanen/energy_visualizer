@@ -453,6 +453,8 @@ const ChartByHour = () => {
         isAnimated
         noOfSections={6}
         labelsDistanceFromXaxis={10}
+        maxValue={12000}
+        mostNegativeValue={-6000}
       />
     </View>
   )
