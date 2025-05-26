@@ -10,3 +10,4 @@ The objective is to create a mobile application with React Native and EXPO frame
 |:----:|:----:|:----:|:----:|:----:|
 |23.5.|2|2|Start finally the React native /EXPO project for visualizing the Energy meter data|kick-start the project and implement first barchart with mock data|
 |25.5.|7|9|First bargraph on hourly data! Had to change from using the Victory package, as I did not get it working with React-native and EXPO. Now using react-native-chart-kit.|A lot of chart configuration and theming to be done. react-native-chart-kit is rather clumsy to configure and make respond to tooltips. I need to look into other alternatives such as react-native-svg-charts |
+|26.5.|4|Changed to using react-native-gifted-charts and managed to implement first view for one day hourly energy flows.|Next task is to format (theme) the graphs and start to prepare the whole view layout of the application|

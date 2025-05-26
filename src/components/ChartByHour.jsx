@@ -3,8 +3,8 @@
 import React, { useState, useEffect } from 'react'
 import { Text, View, Dimensions } from 'react-native'
 import { DateTime } from 'luxon'
-import { BarChart, StackedBarChart } from 'react-native-chart-kit'
 import computeEnergyFlows from '../utils/energyCalculator'
+import { BarChart } from 'react-native-gifted-charts'
 
 const hourlyData = [
   {
@@ -393,6 +393,18 @@ const hourlyData = [
   },
 ]
 
+// format the enerData to be compatible with StackedBarChart
+const formatEnergyDataForStackedChart = (data) => {
+  return data.map((reading) => ({
+    label: reading.hour,
+    stacks: [
+      { value: reading.solarUsed, color: '#4cd137' },
+      { value: reading.mainsBought, color: '#273c75' },
+      { value: -1 * reading.solarSold, color: '#e84118' },
+    ],
+  }))
+}
+
 const ChartByHour = () => {
   const [energyData, setEnergyData] = useState([])
 
@@ -405,98 +417,25 @@ const ChartByHour = () => {
       ...item,
       hour: DateTime.fromISO(item.timestamp).toLocal().toFormat('HH'),
     }))
-    setEnergyData(energyFlowPerLocalHour)
+    const formattedEnergyData = formatEnergyDataForStackedChart(
+      energyFlowPerLocalHour
+    )
+    setEnergyData(formattedEnergyData)
   }, [hourlyData])
-
-  const screenWidth = Dimensions.get('window').width
-  const labels = energyData.map((item) => item.hour)
-  const dataPoints = energyData.map((item) => [
-    item.solarUsed,
-    item.mainsBought,
-    item.solarSold,
-  ])
-
-  const barChartData = {
-    labels,
-    legend: [],
-    data: dataPoints,
-    barColors: ['#fbc531', '#273c75', '#4cd137'],
-  }
-
-  const chartConfig = {
-    backgroundGradientFrom: '#fff',
-    backgroundGradientTo: '#fff',
-    decimalPlaces: 1,
-    barPercentage: 0.3,
-
-    color: (opacity = 1) => `rgba(233, 30, 99, ${opacity})`,
-    labelColor: (opacity = 1) => `rgba(33, 33, 33, ${opacity})`,
-
-    style: {
-      borderRadius: 16,
-      elevation: 4,
-      shadowColor: '#000',
-      shadowOffset: { width: 0, height: 2 },
-      shadowOpacity: 0.1,
-      shadowRadius: 4,
-    },
-    propsForBackgroundLines: {
-      stroke: '#e0e0e0', // light gray grid lines (Material Gray 300)
-      strokeDasharray: '',
-    },
-
-    propsForLabels: {
-      fontSize: 12,
-      fontWeight: '500',
-    },
-  }
 
   return (
     <View>
-      <View>
-        <Text>Chart would be here</Text>
-        <StackedBarChart
-          data={barChartData}
-          width={screenWidth - 16}
-          height={300}
-          chartConfig={chartConfig}
-          showBarTops={false}
-          showLegend={false}
-          style={{
-            borderRadius: 16,
-          }}
-        />
-      </View>
-
-      <View
-        style={{
-          flexDirection: 'row',
-          justifyContent: 'center',
-          flexWrap: 'wrap',
-        }}
-      >
-        {['Solar Used', 'Mains Bought', 'Solar Sold'].map((label, index) => (
-          <View
-            key={index}
-            style={{
-              flexDirection: 'row',
-              alignItems: 'center',
-              marginHorizontal: 8,
-              marginVertical: 4,
-            }}
-          >
-            <View
-              style={{
-                width: 12,
-                height: 12,
-                backgroundColor: barChartData.barColors[index],
-                marginRight: 4,
-              }}
-            />
-            <Text style={{ fontSize: 12 }}>{label}</Text>
-          </View>
-        ))}
-      </View>
+      <BarChart
+        stackData={energyData}
+        width={Dimensions.get('window').width - 32}
+        barWidth={20}
+        barBorderRadius={4}
+        frontColor="lightgray"
+        yAxisLabelTexts={['-50', '-25', '0', '25', '50']} // optional
+        yAxisTextStyle={{ color: '#333' }}
+        xAxisLabelTextStyle={{ color: '#333' }}
+        isAnimated
+      />
     </View>
   )
 }
