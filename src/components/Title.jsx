@@ -5,8 +5,6 @@ const styles = StyleSheet.create({
   flexContainer: {
     display: 'flex',
     backgroundColor: theme.titleColors.backgroundColor,
-    marginBottom: 50,
-    marginTop: 50,
     alignItems: 'center',
     paddingTop: 20,
     paddingBottom: 20,

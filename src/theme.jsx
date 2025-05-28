@@ -12,6 +12,12 @@ const theme = {
     fontSize: 18,
     fontWeight: 'bold',
   },
+  addressColors: {
+    backgroundColor: '#FAF6E9',
+    textColor: '#3D5300',
+    fontSize: 12,
+    fontWeight: 'normal',
+  },
 }
 
 export default theme

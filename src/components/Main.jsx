@@ -1,6 +1,7 @@
 import Constants from 'expo-constants'
 import { Text, StyleSheet, View } from 'react-native'
 import Title from './Title'
+import PlantData from './PlantData'
 import ChartByHour from './ChartByHour'
 
 const styles = StyleSheet.create({
@@ -8,6 +9,7 @@ const styles = StyleSheet.create({
     marginTop: Constants.statusBarHeight,
     flexGrow: 1,
     flexShrink: 1,
+    
   },
 })
 
@@ -15,6 +17,7 @@ const Main = () => {
   return (
     <View style={styles.container}>
       <Title />
+      <PlantData />
       <ChartByHour />
     </View>
   )
