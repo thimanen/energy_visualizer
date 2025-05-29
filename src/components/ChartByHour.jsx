@@ -6,8 +6,9 @@ import { DateTime } from 'luxon'
 import computeEnergyFlows from '../utils/energyCalculator'
 import { BarChart } from 'react-native-gifted-charts'
 import theme from '../theme'
+import useHourlyData from '../hooks/useHourlyData'
 
-const hourlyData = [
+const hourlyData_old = [
   {
     total_act_energy: 1132.6395,
     total_act_ret_energy: 0,
@@ -417,13 +418,30 @@ const formatEnergyDataForStackedChart = (data) => {
   return formattedData
 }
 
-const ChartByHour = () => {
+const ChartByHour = ({ date }) => {
   const [energyData, setEnergyData] = useState([])
-
-  const solarData = hourlyData.filter((s) => s.source === 'solar')
-  const mainsData = hourlyData.filter((m) => m.source === 'mains')
-
+  const { hourlyData, loading } = useHourlyData(date)
+  
   useEffect(() => {
+    if (loading) {
+      return (
+        <View>
+          <Text>Loading...</Text>
+        </View>
+      )
+    }
+
+    if (!hourlyData) {
+      return (
+        <View>
+          <Text>No data available</Text>
+        </View>
+      )
+    }
+
+    const solarData = hourlyData.filter((s) => s.source === 'solar')
+    const mainsData = hourlyData.filter((m) => m.source === 'mains')
+
     const energyFlow = computeEnergyFlows(mainsData, solarData)
     const energyFlowPerLocalHour = energyFlow.map((item) => ({
       ...item,
