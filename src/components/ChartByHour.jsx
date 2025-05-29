@@ -421,37 +421,39 @@ const formatEnergyDataForStackedChart = (data) => {
 const ChartByHour = ({ date }) => {
   const [energyData, setEnergyData] = useState([])
   const { hourlyData, loading } = useHourlyData(date)
-  
+
   useEffect(() => {
-    if (loading) {
-      return (
-        <View>
-          <Text>Loading...</Text>
-        </View>
+    if (!loading && hourlyData && hourlyData.length > 0) {
+      const solarData = hourlyData.filter((s) => s.source === 'solar')
+      const mainsData = hourlyData.filter((m) => m.source === 'mains')
+
+      const energyFlow = computeEnergyFlows(mainsData, solarData)
+      const energyFlowPerLocalHour = energyFlow.map((item) => ({
+        ...item,
+        hour: DateTime.fromISO(item.timestamp).toLocal().toFormat('HH'),
+      }))
+      const formattedEnergyData = formatEnergyDataForStackedChart(
+        energyFlowPerLocalHour
       )
+      setEnergyData(formattedEnergyData)
     }
-
-    if (!hourlyData) {
-      return (
-        <View>
-          <Text>No data available</Text>
-        </View>
-      )
-    }
-
-    const solarData = hourlyData.filter((s) => s.source === 'solar')
-    const mainsData = hourlyData.filter((m) => m.source === 'mains')
-
-    const energyFlow = computeEnergyFlows(mainsData, solarData)
-    const energyFlowPerLocalHour = energyFlow.map((item) => ({
-      ...item,
-      hour: DateTime.fromISO(item.timestamp).toLocal().toFormat('HH'),
-    }))
-    const formattedEnergyData = formatEnergyDataForStackedChart(
-      energyFlowPerLocalHour
-    )
-    setEnergyData(formattedEnergyData)
   }, [hourlyData])
+
+  if (loading) {
+    return (
+      <View>
+        <Text>Loading...</Text>
+      </View>
+    )
+  }
+
+  if (!hourlyData || hourlyData.length === 0) {
+    return (
+      <View>
+        <Text>No data available</Text>
+      </View>
+    )
+  }
 
   return (
     <View>

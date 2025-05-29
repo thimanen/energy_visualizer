@@ -9,7 +9,7 @@ const useHourlyData = (date) => {
 
   const fetchHourlyData = async () => {
     if (!DateTime.fromFormat(date, 'yyyy-MM-dd').isValid) {
-      return []
+      return
     }
     setLoading(true)
 
