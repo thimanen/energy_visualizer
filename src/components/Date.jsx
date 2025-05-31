@@ -1,19 +1,18 @@
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 import { DateTime } from 'luxon'
 
-const Date = ({ date, onSelectDate, selected }) => {
+const Date = ({ today, date, onSelectDate, selected }) => {
   const inputDate = DateTime.fromISO(date)
-  const today = DateTime.local()
-
+  
   // day is written on datepicker
   const day =
-    inputDate.toFormat('YYYY-MM-dd') === today.toFormat('YYYY-MM-dd')
+    inputDate.toISODate() === today
       ? 'Today'
       : inputDate.toFormat('EEE')
 
   // number of the day
   const dayNumber = inputDate.toFormat('d')
-  const fullDate = inputDate.toFormat('YYYY-MM-dd')
+  const fullDate = inputDate.toISODate()
 
   return (
     <TouchableOpacity
