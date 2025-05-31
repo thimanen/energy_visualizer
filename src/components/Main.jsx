@@ -1,10 +1,11 @@
 import { useState } from 'react'
 import Constants from 'expo-constants'
-import { TextInput, StyleSheet, View } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import { DateTime } from 'luxon'
 import Title from './Title'
 import PlantData from './PlantData'
 import ChartByHour from './ChartByHour'
+import CalBar from './CalBar'
 import Calendar from './Calendar'
 
 const styles = StyleSheet.create({
@@ -17,21 +18,20 @@ const styles = StyleSheet.create({
 
 const Main = () => {
   const today = DateTime.local().toISODate()
-  const [date, setDate] = useState(today)
-  const [selectedDate, setSelectedDate] = useState(
-    DateTime.local().toISODate()
-  )
 
-  const handleDateChange = (text) => {
-    setDate(text)
-  }
+  const [selectedDate, setSelectedDate] = useState(DateTime.local().toISODate())
 
   return (
     <View style={styles.container}>
       <Title />
       <PlantData />
       <ChartByHour date={selectedDate} />
-      <Calendar today={today} onSelectDate={setSelectedDate} selected={selectedDate} />
+      <CalBar />
+      <Calendar
+        today={today}
+        onSelectDate={setSelectedDate}
+        selected={selectedDate}
+      />
     </View>
   )
 }

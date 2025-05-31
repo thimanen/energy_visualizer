@@ -80,6 +80,7 @@ const ChartByHour = ({ date }) => {
         barBorderRadius={4}
         backgroundColor={theme.chartColors.backgroundColor}
         yAxisTextStyle={{ color: theme.chartColors.labelColor, fontSize: 10 }}
+        yAxisLabelTexts={['-6kWh','-4kWh','-2kWh','0','2kWh','4kWh','6kWh','8kWh','10kWh','12kWh']}
         xAxisLabelTextStyle={{
           color: theme.chartColors.labelColor,
           fontSize: 10,

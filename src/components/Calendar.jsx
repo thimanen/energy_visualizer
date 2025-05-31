@@ -6,30 +6,37 @@ import Date from './Date'
 const Calendar = ({ today, onSelectDate, selected }) => {
   const [dates, setDates] = useState([])
   const [visibleMonth, setVisibleMonth] = useState(
-    DateTime.local().toFormat('LLL')
+    DateTime.local().toFormat('LLLL')
   )
   const calendarRef = useRef(null)
 
   // initial dates -30 to +30 days
   useEffect(() => {
     const initialDates = []
-    for (let i = -30; i < 30; i++) {
+    for (let i = -60; i <= 0; i++) {
       initialDates.push(DateTime.local().plus({ days: i }))
     }
     setDates(initialDates)
   }, [])
 
   const renderItem = ({ item }) => (
-    <Date today={today} date={item} onSelectDate={onSelectDate} selected={selected} />
+    <Date
+      today={today}
+      date={item}
+      onSelectDate={onSelectDate}
+      selected={selected}
+    />
   )
 
-  const handleScrollToToday = () => {
-    if (calendarRef.current && dates.length > 0) {
-      calendarRef.current.scrollToIndex({ index: 28, animated: false })
-    }
-  }
   useEffect(() => {
-    handleScrollToToday()
+    if (calendarRef.current && dates.length > 0) {
+      setTimeout(() => {
+        calendarRef.current.scrollToIndex({
+          index: dates.length - 1,
+          animated: true,
+        })
+      }, 0)
+    }
   }, [dates])
 
   const handleScrollToIndexFailed = (info) => {
@@ -43,6 +50,16 @@ const Calendar = ({ today, onSelectDate, selected }) => {
       }
     }, 500)
   }
+
+  const onViewableItemsChanged = useRef(({ viewableItems }) => {
+    if (viewableItems.length > 0) {
+      const centerIndex = Math.floor(viewableItems.length / 2)
+      const centerDate = viewableItems[centerIndex].item
+      setVisibleMonth(centerDate.toFormat('LLLL'))
+    }
+  }).current
+
+  const viewConfigRef = useRef({ viewAreaCoveragePercentThreshold: 50 })
 
   return (
     <View>
@@ -58,12 +75,15 @@ const Calendar = ({ today, onSelectDate, selected }) => {
             keyExtractor={(item) => item.toISODate()}
             renderItem={renderItem}
             getItemLayout={(data, index) => ({
-                length: 60,
-                offset: 60 * index,
-                index,
-              })}
+              length: 70,
+              offset: 70 * index,
+              index,
+            })}
+            initialScrollIndex={dates.length - 1}
             showsHorizontalScrollIndicator={false}
             onScrollToIndexFailed={handleScrollToIndexFailed}
+            onViewableItemsChanged={onViewableItemsChanged}
+            viewabilityConfig={viewConfigRef.current}
           />
         </View>
       </View>
