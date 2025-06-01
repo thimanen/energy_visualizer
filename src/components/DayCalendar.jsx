@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, FlatList } from 'react-native'
 import { DateTime } from 'luxon'
 import Date from './Date'
 
-const Calendar = ({ today, onSelectDate, selected }) => {
+const DayCalendar = ({ today, onSelectDate, selected }) => {
   const [dates, setDates] = useState([])
   const [visibleMonth, setVisibleMonth] = useState(
     DateTime.local().toFormat('LLLL')
@@ -91,7 +91,7 @@ const Calendar = ({ today, onSelectDate, selected }) => {
   )
 }
 
-export default Calendar
+export default DayCalendar
 
 const styles = StyleSheet.create({
   centered: {

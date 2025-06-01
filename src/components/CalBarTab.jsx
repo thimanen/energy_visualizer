@@ -1,9 +1,15 @@
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 
-const CalBarTab = ({ title }) => {
+const CalBarTab = ({ title, calendarMode, setCalendarMode }) => {
   return (
-    <TouchableOpacity style={styles.card}>
-      <Text>{title}</Text>
+    <TouchableOpacity
+      style={[
+        styles.card,
+        calendarMode === title && { backgroundColor: '#6146c6' },
+      ]}
+      onPress={() =>setCalendarMode(title)}
+    >
+      <Text style={[calendarMode === title && { color: '#fff' }]}>{title}</Text>
     </TouchableOpacity>
   )
 }

@@ -15,3 +15,4 @@ The objective is to create a mobile application with React Native and EXPO frame
 |29.5.|5|28|Implemented a useHourlyData hook to fetch hourly data per date from server. Also created a simple textInput to change the date and verífy that loading works for all dates.|Next taslk is to implement a simple date picker. I am thinking of a simple horizontal scrollView|
 |30.5.|4|32|Implemented first version of date picker. Horizontal ScrollView... far from satisfactory still.|Next I need to work with the server again. I need a GET routes for weekly and monthly data. Also need to reduce the logging to console.|
 |31.5.|6|38|Date picker now works and can select the daily graph to show. The current month is also visible and initial version of calendar mode selector (day, week, month, year)|Server update...|
+|1.6.|2|40|Finished the calendar mode selection. It is now using same styles as the day calendar|Server update...|

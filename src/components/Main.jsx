@@ -6,7 +6,7 @@ import Title from './Title'
 import PlantData from './PlantData'
 import ChartByHour from './ChartByHour'
 import CalBar from './CalBar'
-import Calendar from './Calendar'
+import DayCalendar from './DayCalendar'
 
 const styles = StyleSheet.create({
   container: {
@@ -19,6 +19,7 @@ const styles = StyleSheet.create({
 const Main = () => {
   const today = DateTime.local().toISODate()
 
+  const [calendarMode, setCalendarMode] = useState('Day')
   const [selectedDate, setSelectedDate] = useState(DateTime.local().toISODate())
 
   return (
@@ -26,8 +27,8 @@ const Main = () => {
       <Title />
       <PlantData />
       <ChartByHour date={selectedDate} />
-      <CalBar />
-      <Calendar
+      <CalBar calendarMode={calendarMode} setCalendarMode={setCalendarMode} />
+      <DayCalendar
         today={today}
         onSelectDate={setSelectedDate}
         selected={selectedDate}

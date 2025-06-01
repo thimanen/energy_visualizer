@@ -10,13 +10,29 @@ const styles = StyleSheet.create({
   },
 })
 
-const CalBar = () => {
+const CalBar = ({ calendarMode, setCalendarMode }) => {
   return (
     <View style={styles.calSelector}>
-      <CalBarTab title={'Day'} />
-      <CalBarTab title={'Week'} />
-      <CalBarTab title={'Month'} />
-      <CalBarTab title={'Year'} />
+      <CalBarTab
+        title={'Day'}
+        calendarMode={calendarMode}
+        setCalendarMode={setCalendarMode}
+      />
+      <CalBarTab
+        title={'Week'}
+        calendarMode={calendarMode}
+        setCalendarMode={setCalendarMode}
+      />
+      <CalBarTab
+        title={'Month'}
+        calendarMode={calendarMode}
+        setCalendarMode={setCalendarMode}
+      />
+      <CalBarTab
+        title={'Year'}
+        calendarMode={calendarMode}
+        setCalendarMode={setCalendarMode}
+      />
     </View>
   )
 }
