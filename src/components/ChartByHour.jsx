@@ -8,9 +8,8 @@ import { BarChart } from 'react-native-gifted-charts'
 import theme from '../theme'
 import useHourlyData from '../hooks/useHourlyData'
 
-
 // format the enerData to be compatible with StackedBarChart
-const formatEnergyDataForStackedChart = (data) => {
+const formatEnergyDataForStackedChartPerHour = (data) => {
   const formattedData = []
   for (let i = 0; i < data.length; i++) {
     const reading = data[i]
@@ -46,7 +45,7 @@ const ChartByHour = ({ date }) => {
         ...item,
         hour: DateTime.fromISO(item.timestamp).toLocal().toFormat('HH'),
       }))
-      const formattedEnergyData = formatEnergyDataForStackedChart(
+      const formattedEnergyData = formatEnergyDataForStackedChartPerHour(
         energyFlowPerLocalHour
       )
       setEnergyData(formattedEnergyData)
@@ -80,7 +79,18 @@ const ChartByHour = ({ date }) => {
         barBorderRadius={4}
         backgroundColor={theme.chartColors.backgroundColor}
         yAxisTextStyle={{ color: theme.chartColors.labelColor, fontSize: 10 }}
-        yAxisLabelTexts={['-6kWh','-4kWh','-2kWh','0','2kWh','4kWh','6kWh','8kWh','10kWh','12kWh']}
+        yAxisLabelTexts={[
+          '-6kWh',
+          '-4kWh',
+          '-2kWh',
+          '0',
+          '2kWh',
+          '4kWh',
+          '6kWh',
+          '8kWh',
+          '10kWh',
+          '12kWh',
+        ]}
         xAxisLabelTextStyle={{
           color: theme.chartColors.labelColor,
           fontSize: 10,

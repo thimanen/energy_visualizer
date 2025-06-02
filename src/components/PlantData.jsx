@@ -106,11 +106,11 @@ const PlantData = () => {
             </View>
             <View style={styles.imageBottomRow}>
               <View style={styles.weatherIcon}>
-                <Text>This month</Text>
+                <Text>This month kWh</Text>
               </View>
 
               <View style={styles.weatherTemp}>
-                <Text>All time</Text>
+                <Text>All time kWh</Text>
               </View>
             </View>
           </View>

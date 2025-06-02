@@ -7,6 +7,7 @@ import PlantData from './PlantData'
 import ChartByHour from './ChartByHour'
 import CalBar from './CalBar'
 import DayCalendar from './DayCalendar'
+import ChartByDay from './ChartByDay'
 
 const styles = StyleSheet.create({
   container: {
@@ -26,7 +27,8 @@ const Main = () => {
     <View style={styles.container}>
       <Title />
       <PlantData />
-      <ChartByHour date={selectedDate} />
+      {calendarMode === 'Day' && <ChartByHour date={selectedDate} />}
+      {calendarMode === 'Week' && <ChartByDay date={selectedDate} />}
       <CalBar calendarMode={calendarMode} setCalendarMode={setCalendarMode} />
       <DayCalendar
         today={today}

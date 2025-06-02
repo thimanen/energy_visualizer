@@ -12,13 +12,13 @@ const computeEnergyFlows = (mains, solar) => {
   const result = []
 
   for (let i = 0; i < mains.length; i++) {
-    const mainsHour = mains[i]
-    const solarHour = solar[i]
+    const mainsData = mains[i]
+    const solarData = solar[i]
 
-    const timestamp = mainsHour.timestamp
-    const solarProduced = roundToFour(solarHour.total_act_energy)
-    const solarSold = roundToFour(mainsHour.total_act_ret_energy)
-    const mainsBought = roundToFour(mainsHour.total_act_energy)
+    const timestamp = mainsData.timestamp
+    const solarProduced = roundToFour(solarData.total_act_energy)
+    const solarSold = roundToFour(mainsData.total_act_ret_energy)
+    const mainsBought = roundToFour(mainsData.total_act_energy)
     const solarUsed = roundToFour(solarProduced - solarSold)
     const totalConsumption = roundToFour(mainsBought + solarUsed)
     const netFlow = roundToFour(mainsBought - solarSold)

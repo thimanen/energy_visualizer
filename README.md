@@ -16,3 +16,4 @@ The objective is to create a mobile application with React Native and EXPO frame
 |30.5.|4|32|Implemented first version of date picker. Horizontal ScrollView... far from satisfactory still.|Next I need to work with the server again. I need a GET routes for weekly and monthly data. Also need to reduce the logging to console.|
 |31.5.|6|38|Date picker now works and can select the daily graph to show. The current month is also visible and initial version of calendar mode selector (day, week, month, year)|Server update...|
 |1.6.|2|40|Finished the calendar mode selection. It is now using same styles as the day calendar|Server update...|
+|2.6.|3|43|Week graph implemented. Given any date, the graph is pulled for that week.|Next month and year views and respective GET routes|
