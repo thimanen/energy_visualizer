@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import Constants from 'expo-constants'
 import { StyleSheet, View } from 'react-native'
 import { DateTime } from 'luxon'
 import Title from './Title'
@@ -11,7 +10,7 @@ import ChartByDay from './ChartByDay'
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: Constants.statusBarHeight,
+    marginTop: 5,
     flexGrow: 1,
     flexShrink: 1,
   },
