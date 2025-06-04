@@ -9,8 +9,7 @@ const useDailyData = (date) => {
   //make sure the give date is a Monday, and if not, make it a Monday (of the same week)
   const givenDate = DateTime.fromISO(date, { zone: 'Europe/Helsinki' })
   const monday = givenDate.startOf('week').toISODate()
-  console.log(monday)
-
+  
   const url = `http://192.168.68.119:3000/energy/daily/${monday}`
 
   const fetchDailyData = async () => {

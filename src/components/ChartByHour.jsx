@@ -94,6 +94,7 @@ const ChartByHour = ({ date }) => {
         xAxisLabelTextStyle={{
           color: theme.chartColors.labelColor,
           fontSize: 10,
+          textAlign: 'center',
         }}
         isAnimated
         noOfSections={6}

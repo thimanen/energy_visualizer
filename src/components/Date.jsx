@@ -1,24 +1,28 @@
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
-import { DateTime } from 'luxon'
+import { DateTime, Interval } from 'luxon'
 
-const Date = ({ today, date, onSelectDate, selected }) => {
+const Date = ({ today, date, onSelectDate, selected, calendarMode }) => {
   const inputDate = DateTime.fromISO(date)
-  
+
   // day is written on datepicker
   const day =
-    inputDate.toISODate() === today
-      ? 'Today'
-      : inputDate.toFormat('EEE')
+    inputDate.toISODate() === today ? 'Today' : inputDate.toFormat('EEE')
 
   // number of the day
   const dayNumber = inputDate.toFormat('d')
   const fullDate = inputDate.toISODate()
+
+  const monday = DateTime.fromISO(selected).startOf('week')
+  const weekInterval = Interval.fromDateTimes(monday, monday.plus({ days: 7 }))
+  console.log(weekInterval.contains(fullDate))
 
   return (
     <TouchableOpacity
       onPress={() => onSelectDate(fullDate)}
       style={[
         styles.card,
+        weekInterval.contains(DateTime.fromISO(fullDate)) &&
+          calendarMode === 'Week' && { backgroundColor: '#cfcefc' },
         selected === fullDate && { backgroundColor: '#6146c6' },
       ]}
     >

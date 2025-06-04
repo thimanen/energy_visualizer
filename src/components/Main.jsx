@@ -34,6 +34,7 @@ const Main = () => {
         today={today}
         onSelectDate={setSelectedDate}
         selected={selectedDate}
+        calendarMode={calendarMode}
       />
     </View>
   )

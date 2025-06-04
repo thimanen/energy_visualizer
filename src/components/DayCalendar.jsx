@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, FlatList } from 'react-native'
 import { DateTime } from 'luxon'
 import Date from './Date'
 
-const DayCalendar = ({ today, onSelectDate, selected }) => {
+const DayCalendar = ({ today, onSelectDate, selected, calendarMode }) => {
   const [dates, setDates] = useState([])
   const [visibleMonth, setVisibleMonth] = useState(
     DateTime.local().toFormat('LLLL')
@@ -25,6 +25,7 @@ const DayCalendar = ({ today, onSelectDate, selected }) => {
       date={item}
       onSelectDate={onSelectDate}
       selected={selected}
+      calendarMode={calendarMode}
     />
   )
 

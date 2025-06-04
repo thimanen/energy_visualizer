@@ -6,120 +6,6 @@ import { BarChart } from 'react-native-gifted-charts'
 import theme from '../theme'
 import useDailyData from '../hooks/useDailyData'
 
-const dailyData_old = [
-  {
-    total_act_energy: 32062.353,
-    total_act_ret_energy: 19572.246,
-    max_act_power: 7843.4,
-    count: 1440,
-    source: 'mains',
-    timestamp: '2025-05-25T21:00:00.000Z',
-  },
-  {
-    total_act_energy: 28542.7894,
-    total_act_ret_energy: 11.5344,
-    max_act_power: 7449.000000000001,
-    count: 1440,
-    source: 'solar',
-    timestamp: '2025-05-25T21:00:00.000Z',
-  },
-  {
-    total_act_energy: 19753.605,
-    total_act_ret_energy: 32346.3811,
-    max_act_power: 11210,
-    count: 1440,
-    source: 'mains',
-    timestamp: '2025-05-26T21:00:00.000Z',
-  },
-  {
-    total_act_energy: 43178.9505,
-    total_act_ret_energy: 4.7411,
-    max_act_power: 7330,
-    count: 1440,
-    source: 'solar',
-    timestamp: '2025-05-26T21:00:00.000Z',
-  },
-  {
-    total_act_energy: 16835.641,
-    total_act_ret_energy: 10820.5567,
-    max_act_power: 6264.1,
-    count: 1440,
-    source: 'mains',
-    timestamp: '2025-05-27T21:00:00.000Z',
-  },
-  {
-    total_act_energy: 18521.6858,
-    total_act_ret_energy: 8.3553,
-    max_act_power: 6324.499999999999,
-    count: 1440,
-    source: 'solar',
-    timestamp: '2025-05-27T21:00:00.000Z',
-  },
-  {
-    total_act_energy: 29208.5537,
-    total_act_ret_energy: 15593.3256,
-    max_act_power: 9988.1,
-    count: 1440,
-    source: 'mains',
-    timestamp: '2025-05-28T21:00:00.000Z',
-  },
-  {
-    total_act_energy: 21991.7075,
-    total_act_ret_energy: 13.2348,
-    max_act_power: 5226.299999999999,
-    count: 1440,
-    source: 'solar',
-    timestamp: '2025-05-28T21:00:00.000Z',
-  },
-  {
-    total_act_energy: 15540.9391,
-    total_act_ret_energy: 30773.4705,
-    max_act_power: 5962.1,
-    count: 1440,
-    source: 'mains',
-    timestamp: '2025-05-29T21:00:00.000Z',
-  },
-  {
-    total_act_energy: 40564.6254,
-    total_act_ret_energy: 8.1169,
-    max_act_power: 6816.1,
-    count: 1440,
-    source: 'solar',
-    timestamp: '2025-05-29T21:00:00.000Z',
-  },
-  {
-    total_act_energy: 21694.8046,
-    total_act_ret_energy: 5227.7257,
-    max_act_power: 10524.5,
-    count: 1440,
-    source: 'mains',
-    timestamp: '2025-05-30T21:00:00.000Z',
-  },
-  {
-    total_act_energy: 13117.9111,
-    total_act_ret_energy: 14.4743,
-    max_act_power: 2265.1,
-    count: 1440,
-    source: 'solar',
-    timestamp: '2025-05-30T21:00:00.000Z',
-  },
-  {
-    total_act_energy: 11977.0972,
-    total_act_ret_energy: 11095.2803,
-    max_act_power: 9637.5,
-    count: 1317,
-    source: 'mains',
-    timestamp: '2025-05-31T21:00:00.000Z',
-  },
-  {
-    total_act_energy: 19317.0175,
-    total_act_ret_energy: 0.47329999999999994,
-    max_act_power: 8045.5,
-    count: 1317,
-    source: 'solar',
-    timestamp: '2025-05-31T21:00:00.000Z',
-  },
-]
 
 // format the enerData to be compatible with StackedBarChart
 const formatEnergyDataForStackedChartPerDay = (data) => {
@@ -203,6 +89,7 @@ const ChartByDay = ({ date }) => {
         xAxisLabelTextStyle={{
           color: theme.chartColors.labelColor,
           fontSize: 10,
+          textAlign: 'center',
         }}
         isAnimated
         noOfSections={6}
