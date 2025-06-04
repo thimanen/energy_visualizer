@@ -14,8 +14,7 @@ const Date = ({ today, date, onSelectDate, selected, calendarMode }) => {
 
   const monday = DateTime.fromISO(selected).startOf('week')
   const weekInterval = Interval.fromDateTimes(monday, monday.plus({ days: 7 }))
-  console.log(weekInterval.contains(fullDate))
-
+  
   return (
     <TouchableOpacity
       onPress={() => onSelectDate(fullDate)}
