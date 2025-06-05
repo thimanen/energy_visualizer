@@ -18,3 +18,4 @@ The objective is to create a mobile application with React Native and EXPO frame
 |1.6.|2|40|Finished the calendar mode selection. It is now using same styles as the day calendar.|Server update...|
 |2.6.|3|43|Week graph implemented. Given any date, the graph is pulled for that week.|Next month and year views and respective GET routes|
 |4.6.|4|47|Modified the date selector and studied building standalone Android app|TODO: 1 GET weekly, 2 GET monthly. 3 Weather data in plant image. 4 Aggregated energy generation in plant image. 5 Instantaneous energy flow in plat image. 6 Tooltips to barchar to indicate values when individual bar is pressed. 7 Authentication|
+|5.6.|4|Managed to build standalone Android app, but it is still not possible to fetch data with HTTP. With mobile browser it works i.e. firewall has a hole..|TODO same as yesterday. Get data fetch working for standalone application|

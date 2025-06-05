@@ -9,7 +9,7 @@ const useDailyData = (date) => {
   //make sure the give date is a Monday, and if not, make it a Monday (of the same week)
   const givenDate = DateTime.fromISO(date, { zone: 'Europe/Helsinki' })
   const monday = givenDate.startOf('week').toISODate()
-  
+
   /*
   const url = `http://192.168.68.119:3000/energy/daily/${monday}`
 */
@@ -23,11 +23,25 @@ const useDailyData = (date) => {
 
     setLoading(true)
 
-    const response = await fetch(url)
-    const json = await response.json()
-    dataCache.current[monday] = json
-    setLoading(false)
-    setDailyData(json)
+    try {
+      const response = await fetch(url)
+      if (!response.ok) {
+        console.error(`Fetch error: ${response.status} ${response.statusText}`)
+        const errorText = await response.text()
+        console.error(`Server response: ${errorText}`)
+        setLoading(false)
+        return
+      }
+
+      const json = await response.json()
+      dataCache.current[monday] = json
+
+      setDailyData(json)
+    } catch (error) {
+        console.error('Fecth exception:', error)
+    } finally {
+      setLoading(false)
+    }
   }
 
   useEffect(() => {

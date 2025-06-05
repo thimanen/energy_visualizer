@@ -10,13 +10,14 @@
     "lint": "eslint ./src/**/*.{js,jsx} App.js --no-error-on-unmatched-pattern"
   },
   "dependencies": {
-    "expo": "~53.0.9",
-    "expo-linear-gradient": "~14.1.4",
+    "expo": "53.0.10",
+    "expo-linear-gradient": "~14.1.5",
     "luxon": "^3.6.1",
     "react": "19.0.0",
-    "react-native": "0.79.2",
+    "react-native": "0.79.3",
     "react-native-gifted-charts": "^1.4.61",
-    "react-native-svg": "15.11.2"
+    "react-native-svg": "15.11.2",
+    "expo-build-properties": "~0.14.6"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
@@ -35,5 +36,4 @@
     }
   },
   "private": true
-  
 }

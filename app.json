@@ -22,7 +22,8 @@
         "backgroundColor": "#ffffff"
       },
       "edgeToEdgeEnabled": true,
-      "package": "com.thimanen.energy_visualizer"
+      "package": "com.thimanen.energy_visualizer",
+      "usesCleartextTraffic": true
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -31,6 +32,16 @@
       "eas": {
         "projectId": "f4a4ff4d-0d2c-4813-81ac-4bb623f95d52"
       }
-    }
+    },
+    "plugins": [
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "usesCleartextTraffic": true
+          }
+        }
+      ]
+    ]
   }
 }
