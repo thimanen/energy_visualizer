@@ -69,7 +69,7 @@ const ChartByHour = ({ date }) => {
   }
 
   return (
-    <View>
+    <View style={{ backgroundColor: theme.chartColors.backgroundColor, padding: 5 }}>
       <BarChart
         stackData={energyData}
         width={Dimensions.get('window').width - 10}
@@ -78,7 +78,11 @@ const ChartByHour = ({ date }) => {
         spacing={5}
         barBorderRadius={4}
         backgroundColor={theme.chartColors.backgroundColor}
-        yAxisTextStyle={{ color: theme.chartColors.labelColor, fontSize: 10 }}
+        yAxisTextStyle={{
+          color: theme.chartColors.labelColor,
+          fontSize: 12,
+          backgroundColor: theme.chartColors.backgroundColor,
+        }}
         yAxisLabelTexts={[
           '-6kWh',
           '-4kWh',

@@ -1,11 +1,12 @@
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import theme from '../theme'
 
 const CalBarTab = ({ title, calendarMode, setCalendarMode }) => {
   return (
     <TouchableOpacity
       style={[
         styles.card,
-        calendarMode === title && { backgroundColor: '#6146c6' },
+        calendarMode === title && { backgroundColor: theme.calendarColors.cardSelectHigh },
       ]}
       onPress={() =>setCalendarMode(title)}
     >
@@ -18,7 +19,7 @@ export default CalBarTab
 
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: '#eee',
+    backgroundColor: theme.calendarColors.cardBackground,
     borderRadius: 10,
     borderColor: '#ddd',
     padding: 5,

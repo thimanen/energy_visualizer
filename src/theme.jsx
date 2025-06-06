@@ -18,6 +18,11 @@ const theme = {
     fontSize: 12,
     fontWeight: 'normal',
   },
+  calendarColors: {
+    cardBackground: '#EEEEEE',
+    cardSelectHigh: '#6146c6',
+    cardSelectedLow: '#cfcefc',
+  },
 }
 
 export default theme

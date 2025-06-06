@@ -6,7 +6,6 @@ import { BarChart } from 'react-native-gifted-charts'
 import theme from '../theme'
 import useDailyData from '../hooks/useDailyData'
 
-
 // format the enerData to be compatible with StackedBarChart
 const formatEnergyDataForStackedChartPerDay = (data) => {
   const formattedData = []
@@ -63,7 +62,7 @@ const ChartByDay = ({ date }) => {
   }
 
   return (
-    <View>
+    <View style={{backgroundColor: theme.chartColors.backgroundColor, padding: 5 }}>
       <BarChart
         stackData={energyData}
         width={Dimensions.get('window').width - 10}
@@ -72,7 +71,11 @@ const ChartByDay = ({ date }) => {
         spacing={10}
         barBorderRadius={4}
         backgroundColor={theme.chartColors.backgroundColor}
-        yAxisTextStyle={{ color: theme.chartColors.labelColor, fontSize: 10 }}
+        yAxisTextStyle={{
+          color: theme.chartColors.labelColor,
+          fontSize: 12,
+          backgroundColor: theme.chartColors.backgroundColor,
+        }}
         yAxisLabelTexts={[
           '-40kWh',
           '-30kWh',

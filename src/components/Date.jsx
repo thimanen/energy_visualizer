@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 import { DateTime, Interval } from 'luxon'
+import theme from '../theme'
 
 const Date = ({ today, date, onSelectDate, selected, calendarMode }) => {
   const inputDate = DateTime.fromISO(date)
@@ -21,8 +22,8 @@ const Date = ({ today, date, onSelectDate, selected, calendarMode }) => {
       style={[
         styles.card,
         weekInterval.contains(DateTime.fromISO(fullDate)) &&
-          calendarMode === 'Week' && { backgroundColor: '#cfcefc' },
-        selected === fullDate && { backgroundColor: '#6146c6' },
+          calendarMode === 'Week' && { backgroundColor: theme.calendarColors.cardSelectedLow },
+        selected === fullDate && { backgroundColor: theme.calendarColors.cardSelectHigh },
       ]}
     >
       <Text style={[styles.big, selected === fullDate && { color: '#fff' }]}>
@@ -49,7 +50,7 @@ export default Date
 
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: '#eee',
+    backgroundColor: theme.calendarColors.cardBackground,
     borderRadius: 10,
     borderColor: '#ddd',
     padding: 5,

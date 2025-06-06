@@ -6,12 +6,11 @@ const useHourlyData = (date) => {
   const [loading, setLoading] = useState(false)
   const dataCache = useRef({})
 
-  /*
   const url = `http://192.168.68.119:3000/energy/hourly/${date}`
-  */
 
+  /*
   const url = `http://82.128.129.121:3000/energy/hourly/${date}`
-
+*/
   const fetchHourlyData = async () => {
     if (!DateTime.fromFormat(date, 'yyyy-MM-dd').isValid) {
       return
@@ -24,12 +23,25 @@ const useHourlyData = (date) => {
 
     setLoading(true)
 
-    const response = await fetch(url)
-    const json = await response.json()
-    dataCache.current[date] = json
+    try {
+      const response = await fetch(url)
 
-    setLoading(false)
-    setHourlyData(json)
+      if (!response.ok) {
+        console.error(`Fetch error: ${response.status} ${response.statusText}`)
+        const errorText = await response.text()
+        console.error(`Server response: ${errorText}`)
+        setLoading(false)
+        return
+      }
+      const json = await response.json()
+      dataCache.current[date] = json
+
+      setHourlyData(json)
+    } catch (error) {
+      console.error('Fetch exception:', error)
+    } finally {
+      setLoading(false)
+    }
   }
 
   useEffect(() => {

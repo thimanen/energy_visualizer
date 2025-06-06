@@ -10,12 +10,11 @@ const useDailyData = (date) => {
   const givenDate = DateTime.fromISO(date, { zone: 'Europe/Helsinki' })
   const monday = givenDate.startOf('week').toISODate()
 
-  /*
   const url = `http://192.168.68.119:3000/energy/daily/${monday}`
-*/
 
+  /*
   const url = `http://82.128.129.121:3000/energy/daily/${monday}`
-
+*/
   const fetchDailyData = async () => {
     if (dataCache.current[monday]) {
       setDailyData(dataCache.current[monday])
@@ -38,7 +37,7 @@ const useDailyData = (date) => {
 
       setDailyData(json)
     } catch (error) {
-        console.error('Fecth exception:', error)
+      console.error('Fecth exception:', error)
     } finally {
       setLoading(false)
     }

@@ -7,12 +7,14 @@ import ChartByHour from './ChartByHour'
 import CalBar from './CalBar'
 import DayCalendar from './DayCalendar'
 import ChartByDay from './ChartByDay'
+import theme from '../theme'
 
 const styles = StyleSheet.create({
   container: {
     marginTop: 5,
     flexGrow: 1,
     flexShrink: 1,
+    backgroundColor: theme.chartColors.backgroundColor,
   },
 })
 

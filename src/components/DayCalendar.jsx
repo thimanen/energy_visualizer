@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { StyleSheet, Text, View, FlatList } from 'react-native'
 import { DateTime } from 'luxon'
+import theme from '../theme'
 import Date from './Date'
 
 const DayCalendar = ({ today, onSelectDate, selected, calendarMode }) => {
@@ -63,7 +64,7 @@ const DayCalendar = ({ today, onSelectDate, selected, calendarMode }) => {
   const viewConfigRef = useRef({ viewAreaCoveragePercentThreshold: 50 })
 
   return (
-    <View>
+    <View style={{ backgroundColor: theme.titleColors.backgroundColor }}>
       <View style={styles.centered}>
         <Text style={styles.title}>{visibleMonth}</Text>
       </View>
@@ -105,7 +106,7 @@ const styles = StyleSheet.create({
   },
   dateSection: {
     width: '100%',
-    padding: 20,
+    padding: 10,
   },
   scroll: {
     height: 150,
