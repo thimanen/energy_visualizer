@@ -28,8 +28,6 @@ const useHourlyData = (date) => {
 
       if (!response.ok) {
         console.error(`Fetch error: ${response.status} ${response.statusText}`)
-        const errorText = await response.text()
-        console.error(`Server response: ${errorText}`)
         setLoading(false)
         return
       }

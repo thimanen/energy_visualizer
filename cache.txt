@@ -1,0 +1,7 @@
+<View style={styles.weatherIcon}>
+                <Text>ICON</Text>
+              </View>
+
+              <View style={styles.weatherTemp}>
+                <Text>TEMP</Text>
+              </View>

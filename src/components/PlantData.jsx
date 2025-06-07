@@ -6,7 +6,54 @@ import {
   Pressable,
   ImageBackground,
 } from 'react-native'
+import Weather from './Weather'
 import theme from '../theme'
+
+const PlantData = () => {
+  const openInGoogleMaps = async () => {
+    const url =
+      'https://www.google.com/maps/place/Hevosmiehentie+19,+90420+Oulu/'
+    const supported = await Linking.canOpenURL(url)
+    if (supported) {
+      await Linking.openURL(url)
+    }
+  }
+
+  return (
+    <View style={styles.flexContainer}>
+      <Pressable onPress={openInGoogleMaps}>
+        <View style={styles.addressContainer}>
+          <Text style={styles.addressText}>Hevosmiehentie 19, Oulu</Text>
+        </View>
+      </Pressable>
+      <View style={{ overflow: 'hidden' }}>
+        <ImageBackground
+          source={require('../../images/plant.jpg')}
+          resizeMode="cover"
+          style={styles.image}
+          borderTopRightRadius={20}
+        >
+          <View style={styles.weatherAndEnergy}>
+            <View style={styles.imageTopRow}>
+              <Weather lat={65.0124} long={25.4682} />
+            </View>
+            <View style={styles.imageBottomRow}>
+              <View style={styles.weatherIcon}>
+                <Text>This month kWh</Text>
+              </View>
+
+              <View style={styles.weatherTemp}>
+                <Text>All time kWh</Text>
+              </View>
+            </View>
+          </View>
+        </ImageBackground>
+      </View>
+    </View>
+  )
+}
+
+export default PlantData
 
 const styles = StyleSheet.create({
   flexContainer: {
@@ -39,7 +86,7 @@ const styles = StyleSheet.create({
     width: 300,
     aspectRatio: 16 / 9,
     alignSelf: 'center',
-    opacity: 0.7,
+    opacity: 0.8,
     borderWidth: 0,
     borderColor: theme.chartColors.solarUsed,
     borderTopRightRadius: 20,
@@ -48,15 +95,10 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'space-between',
   },
-  imageTopRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
+  imageTopRow: {},
   weatherIcon: {
     paddingLeft: 10,
     paddingRight: 10,
-    backgroundColor: theme.chartColors.solarSold,
   },
   weatherTemp: {
     paddingLeft: 10,
@@ -69,55 +111,3 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 })
-
-const PlantData = () => {
-  const openInGoogleMaps = async () => {
-    const url =
-      'https://www.google.com/maps/place/Hevosmiehentie+19,+90420+Oulu/'
-    const supported = await Linking.canOpenURL(url)
-    if (supported) {
-      await Linking.openURL(url)
-    }
-  }
-
-  return (
-    <View style={styles.flexContainer}>
-      <Pressable onPress={openInGoogleMaps}>
-        <View style={styles.addressContainer}>
-          <Text style={styles.addressText}>Hevosmiehentie 19, Oulu</Text>
-        </View>
-      </Pressable>
-      <View style={{ overflow: 'hidden' }}>
-        <ImageBackground
-          source={require('../../images/plant.jpg')}
-          resizeMode="cover"
-          style={styles.image}
-          borderTopRightRadius={20}
-        >
-          <View style={styles.weatherAndEnergy}>
-            <View style={styles.imageTopRow}>
-              <View style={styles.weatherIcon}>
-                <Text>ICON</Text>
-              </View>
-
-              <View style={styles.weatherTemp}>
-                <Text>TEMP</Text>
-              </View>
-            </View>
-            <View style={styles.imageBottomRow}>
-              <View style={styles.weatherIcon}>
-                <Text>This month kWh</Text>
-              </View>
-
-              <View style={styles.weatherTemp}>
-                <Text>All time kWh</Text>
-              </View>
-            </View>
-          </View>
-        </ImageBackground>
-      </View>
-    </View>
-  )
-}
-
-export default PlantData
