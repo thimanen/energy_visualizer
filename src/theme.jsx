@@ -9,6 +9,7 @@ const theme = {
   titleColors: {
     backgroundColor: '#FFFDF6',
     textColor: '#3D5300',
+    textColorAlt: '#FFF8DC',
     fontSize: 18,
     fontWeight: 'bold',
   },

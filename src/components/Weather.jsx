@@ -3,9 +3,7 @@ import useWeatherData from '../hooks/useWeatherData'
 import theme from '../theme'
 
 const Weather = ({ lat, long }) => {
-  /*
-  console.log(`latitude: ${lat}, longitude: ${long}`)
-  */
+ 
   const { weatherData, weatherCodes, loading } = useWeatherData(lat, long)
   if (loading) return <Text>Loading weather...</Text>
   if (!weatherData) return <Text>No weather data</Text>
@@ -31,7 +29,7 @@ const Weather = ({ lat, long }) => {
       </View>
       <View style={styles.weatherIcon}>
         <Image
-          style={{ width: 70, height: 70 }}
+          style={{ width: 70, height: 40 }}
           source={{ uri: weatherIconUri }}
         />
       </View>
@@ -56,7 +54,7 @@ const styles = StyleSheet.create({
     paddingRight: 0,
   },
   textStyle: {
-    color: theme.titleColors.textColor,
+    color: theme.titleColors.textColorAlt,
     fontSize: theme.titleColors.fontSize,
     fontWeight: theme.titleColors.fontWeight,
   },

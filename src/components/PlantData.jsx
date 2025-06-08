@@ -7,6 +7,7 @@ import {
   ImageBackground,
 } from 'react-native'
 import Weather from './Weather'
+import Current from './Current'
 import theme from '../theme'
 
 const PlantData = () => {
@@ -35,6 +36,7 @@ const PlantData = () => {
         >
           <View style={styles.weatherAndEnergy}>
             <View style={styles.imageTopRow}>
+              <Current />
               <Weather lat={65.0124} long={25.4682} />
             </View>
             <View style={styles.imageBottomRow}>
@@ -95,7 +97,10 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'space-between',
   },
-  imageTopRow: {},
+  imageTopRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
   weatherIcon: {
     paddingLeft: 10,
     paddingRight: 10,
