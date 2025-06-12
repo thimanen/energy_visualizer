@@ -9,11 +9,10 @@ const Current = () => {
   if (!currentData) return <Text>No current data</Text>
 
   currentEnergy = Math.round(currentData.total_act_energy * 100) / 100
-  console.log(currentEnergy)
-
+  
   return (
     <View style={styles.currentEnergy}>
-      <Text style={styles.textStyle}>{currentEnergy} kWh</Text>
+      <Text style={styles.textStyle}>{currentEnergy} Wh</Text>
     </View>
   )
 }
