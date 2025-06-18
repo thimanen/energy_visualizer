@@ -5,19 +5,20 @@ const useCurrentData = () => {
   const [currentData, setCurrentData] = useState([])
   const [loading, setLoading] = useState(false)
   const dataCache = useRef({})
+  const intervalRef = useRef(null)
 
-  const now = DateTime.now()
-  const minutes = now.minute
+  const url = `http://192.168.68.119:3000/energy/now`
 
   /*
-  const url = `http://192.168.68.119:3000/energy/now`
-*/
-
   const url = `http://82.128.129.121:3000/energy/now`
-
+*/
   const fetchCurrentData = async () => {
+    const now = DateTime.now()
+    const minutes = now.minute
+
     if (dataCache.current[minutes]) {
       setCurrentData(dataCache.current[minutes])
+      return
     }
 
     setLoading(true)
@@ -43,7 +44,15 @@ const useCurrentData = () => {
 
   useEffect(() => {
     fetchCurrentData()
-  }, [minutes])
+
+    intervalRef.current = setInterval(() => {
+      fetchCurrentData()
+    }, 60 * 1000)
+
+    return () => {
+      clearInterval(intervalRef.current)
+    }
+  }, [])
   return { currentData, loading }
 }
 
