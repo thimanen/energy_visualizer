@@ -8,11 +8,11 @@ const Current = () => {
   if (loading) return <Text>Loading data...</Text>
   if (!currentData) return <Text>No current data</Text>
 
-  currentEnergy = Math.round(currentData.total_act_energy * 100) / 100
+  const currentPower = Math.round(currentData.max_act_power * 100) / 100
   
   return (
     <View style={styles.currentEnergy}>
-      <Text style={styles.textStyle}>{currentEnergy} Wh</Text>
+      <Text style={styles.textStyle}>{currentPower} W</Text>
     </View>
   )
 }

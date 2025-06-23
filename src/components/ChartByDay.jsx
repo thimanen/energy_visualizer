@@ -19,13 +19,16 @@ const formatEnergyDataForStackedChartPerDay = (data) => {
         { value: reading.mainsBought, color: theme.chartColors.mainsBought },
         { value: -1 * reading.solarSold, color: theme.chartColors.solarSold },
       ],
+      
     })
   }
+
   return formattedData
 }
 
 const ChartByDay = ({ date }) => {
   const [energyData, setEnergyData] = useState([])
+  const [selectedIndex, setSelectedIndex] = useState(null)
   const { dailyData, loading } = useDailyData(date)
 
   useEffect(() => {
@@ -62,7 +65,9 @@ const ChartByDay = ({ date }) => {
   }
 
   return (
-    <View style={{backgroundColor: theme.chartColors.backgroundColor, padding: 5 }}>
+    <View
+      style={{ backgroundColor: theme.chartColors.backgroundColor, padding: 5 }}
+    >
       <BarChart
         stackData={energyData}
         width={Dimensions.get('window').width - 10}
@@ -99,6 +104,8 @@ const ChartByDay = ({ date }) => {
         labelsDistanceFromXaxis={10}
         maxValue={60000}
         mostNegativeValue={-40000}
+
+        showStackLabels={true}
       />
     </View>
   )
