@@ -19,17 +19,29 @@ const formatEnergyDataForStackedChartPerDay = (data) => {
         { value: reading.mainsBought, color: theme.chartColors.mainsBought },
         { value: -1 * reading.solarSold, color: theme.chartColors.solarSold },
       ],
-      
     })
   }
 
   return formattedData
 }
 
-const ChartByDay = ({ date }) => {
+const ChartByDay = ({ date, setEnergyFlow, setLabelVisible }) => {
   const [energyData, setEnergyData] = useState([])
   const [selectedIndex, setSelectedIndex] = useState(null)
   const { dailyData, loading } = useDailyData(date)
+
+  const handleOnPress = (item, index) => {
+    setEnergyFlow({
+      solarUsed: item.stacks[0].value,
+      mainsBought: item.stacks[1].value,
+      solarSold: -1 * item.stacks[2].value,
+    })
+    setLabelVisible(true)
+
+    setTimeout(() => {
+      setLabelVisible(false)
+    }, 2000)
+  }
 
   useEffect(() => {
     if (dailyData && dailyData.length > 0) {
@@ -104,8 +116,8 @@ const ChartByDay = ({ date }) => {
         labelsDistanceFromXaxis={10}
         maxValue={60000}
         mostNegativeValue={-40000}
-
         showStackLabels={true}
+        onPress={(item, index) => handleOnPress(item, index)}
       />
     </View>
   )
