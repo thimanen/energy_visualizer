@@ -1,17 +1,20 @@
 import { useState, useEffect, useRef } from 'react'
 import { DateTime } from 'luxon'
+import Constants from 'expo-constants'
 
 const useHourlyData = (date) => {
   const [hourlyData, setHourlyData] = useState([])
   const [loading, setLoading] = useState(false)
   const dataCache = useRef({})
 
-  
+  /* 
   const url = `http://192.168.68.119:3000/energy/hourly/${date}`
 
-  /*
+  
   const url = `http://82.128.129.121:3000/energy/hourly/${date}`
-*/
+ */
+  const url = `${Constants.expoConfig.extra.server_uri}/hourly/${date}`
+
   const fetchHourlyData = async () => {
     if (!DateTime.fromFormat(date, 'yyyy-MM-dd').isValid) {
       return

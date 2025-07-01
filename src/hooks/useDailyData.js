@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { DateTime } from 'luxon'
+import Constants from 'expo-constants'
 
 const useDailyData = (date) => {
   const [dailyData, setDailyData] = useState([])
@@ -10,12 +11,15 @@ const useDailyData = (date) => {
   const givenDate = DateTime.fromISO(date, { zone: 'Europe/Helsinki' })
   const monday = givenDate.startOf('week').toISODate()
 
-  
+  /*
   const url = `http://192.168.68.119:3000/energy/daily/${monday}`
 
-/*
+
   const url = `http://82.128.129.121:3000/energy/daily/${monday}`
-*/
+  */
+
+  const url = `${Constants.expoConfig.extra.server_uri}/daily/${monday}`
+
   const fetchDailyData = async () => {
     if (dataCache.current[monday]) {
       setDailyData(dataCache.current[monday])

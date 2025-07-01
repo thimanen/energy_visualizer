@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { DateTime } from 'luxon'
+import Constants from 'expo-constants'
 
 const useCurrentData = () => {
   const [currentData, setCurrentData] = useState([])
@@ -7,11 +8,15 @@ const useCurrentData = () => {
   const dataCache = useRef({})
   const intervalRef = useRef(null)
 
+  /*
   const url = `http://192.168.68.119:3000/energy/now`
 
-  /*
+  
   const url = `http://82.128.129.121:3000/energy/now`
-*/
+  */
+
+  const url = `${Constants.expoConfig.extra.server_uri}/now`
+
   const fetchCurrentData = async () => {
     const now = DateTime.now()
     const minutes = now.minute

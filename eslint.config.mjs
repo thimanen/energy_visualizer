@@ -25,6 +25,8 @@ export default defineConfig([{
     languageOptions: {
         globals: {
             ...reactNative.environments["react-native"]["react-native"],
+            "fetch": "false",
+            "console": "false",
         },
 
         ecmaVersion: 2018,
@@ -45,5 +47,6 @@ export default defineConfig([{
     rules: {
         "react/prop-types": "off",
         "react/react-in-jsx-scope": "off",
+        
     },
 }]);
