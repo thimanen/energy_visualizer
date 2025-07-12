@@ -1,21 +1,78 @@
 // round to four digits
 const roundToFour = (value) => Math.round(value * 10000) / 10000
 
-const computeEnergyFlows = (mains, solar) => {
-  if (!mains || !solar || mains.length !== solar.length) {
-    console.log(
-      'Both mains and solar energy readings are required and must be same length'
-    )
-    return []
+const fillMissingTimestamps = (inputMains, inputSolar) => {
+  const resultMains = []
+  const resultSolar = []
+
+  let i = 0,
+    j = 0
+
+  while (i < inputMains.length || j < inputSolar.length) {
+    const mainsTime = inputMains[i]?.timestamp
+    const solarTime = inputSolar[j]?.timestamp
+
+    if (mainsTime === solarTime) {
+      resultMains.push(inputMains[i])
+      resultSolar.push(inputSolar[j])
+      i++
+      j++
+    } else if (
+      mainsTime &&
+      (!solarTime || new Date(mainsTime) < new Date(solarTime))
+    ) {
+      resultMains.push(inputMains[i])
+      resultSolar.push({
+        total_act_energy: 0,
+        total_act_ret_energy: 0,
+        timestamp: mainsTime,
+      })
+      i++
+    } else if (
+      solarTime &&
+      (!mainsTime || new Date(solarTime) < new Date(mainsTime))
+    ) {
+      resultSolar.push(inputSolar[j])
+      resultMains.push({
+        total_act_energy: 0,
+        total_act_ret_energy: 0,
+        timestamp: solarTime,
+      })
+      j++
+    } else {
+      break
+    }
+  }
+
+  return { mains: resultMains, solar: resultSolar }
+}
+
+const computeEnergyFlows = (inputMains, inputSolar) => {
+  let mains
+  let solar
+
+  if (!inputMains || !inputSolar || inputMains.length !== inputSolar.length) {
+    ;({ mains, solar } = fillMissingTimestamps(inputMains, inputSolar))
+  } else {
+    mains = inputMains
+    solar = inputSolar
   }
 
   const result = []
 
-  for (let i = 0; i < mains.length; i++) {
+  const max_length = mains.length >= solar.length ? mains.length : solar.length
+  console.log('max_length:', max_length)
+  console.log('mains length: ', mains.length)
+  console.log('solar length: ', solar.length)
+
+  for (let i = 0; i < max_length; i++) {
     const mainsData = mains[i]
     const solarData = solar[i]
 
     const timestamp = mainsData.timestamp
+
+    /* console.log('main TS: ',mainsData.timestamp, ', solar TS: ', solarData.timestamp) */
+
     const solarProduced = roundToFour(solarData.total_act_energy)
     const solarSold = roundToFour(mainsData.total_act_ret_energy)
     const mainsBought = roundToFour(mainsData.total_act_energy)
