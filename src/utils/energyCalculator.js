@@ -61,17 +61,12 @@ const computeEnergyFlows = (inputMains, inputSolar) => {
   const result = []
 
   const max_length = mains.length >= solar.length ? mains.length : solar.length
-  console.log('max_length:', max_length)
-  console.log('mains length: ', mains.length)
-  console.log('solar length: ', solar.length)
 
   for (let i = 0; i < max_length; i++) {
     const mainsData = mains[i]
     const solarData = solar[i]
 
     const timestamp = mainsData.timestamp
-
-    /* console.log('main TS: ',mainsData.timestamp, ', solar TS: ', solarData.timestamp) */
 
     const solarProduced = roundToFour(solarData.total_act_energy)
     const solarSold = roundToFour(mainsData.total_act_ret_energy)
