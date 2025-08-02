@@ -14,7 +14,7 @@ const Weather = ({ lat, long }) => {
 
   const weatherIconUri = isDay
     ? weatherCodes[weatherCode].day.image
-    : weatherCodes[weatherCOde].night.image
+    : weatherCodes[weatherCode].night.image
 
   const temperature = weatherData.current.temperature_2m
   const temperatureUnit = weatherData.current_units.temperature_2m
