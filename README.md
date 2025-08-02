@@ -29,3 +29,4 @@ Compile app with: eas build --platform android --profile preview
 |2.7.|3|68|Implemented environment parameters and easier way to define with env param the server address for production and test|TODO: 1 GET weekly, 2 GET monthly. 4 Aggregated energy generation in plant image. 7 Authentication|
 |10.7.|1|69|If for some reason the per minute energy data misses minutes from either source,then the hourly graph is not drawn. Need to make solution where missing data is replaced by zero ||
 |12.7.|4|73|Create fillMissingTimestamps - function to make mains and solar arrays the same size and fill missing timestamps with zero values. Nt nice, but now able to draw the graph. | implement on server side mechanism to re-try failed fetch|
+|2.8.|2|75|Draw icons for the detailed energy flow view (the bar label) and round up to two decimals| implement serve side for monthly and yearly views|
