@@ -2,27 +2,21 @@ import { useState, useEffect, useRef } from 'react'
 import { DateTime } from 'luxon'
 import Constants from 'expo-constants'
 
-const useDailyData = (date) => {
-  const [dailyData, setDailyData] = useState([])
+const useMonthData = (date) => {
+  const [monthData, setMonthData] = useState([])
   const [loading, setLoading] = useState(false)
   const dataCache = useRef({})
 
-  //make sure the give date is a Monday, and if not, make it a Monday (of the same week)
+  //make sure the given date is the first date of the month, and if not, make it the first (of the same month)
   const givenDate = DateTime.fromISO(date, { zone: 'Europe/Helsinki' })
-  const monday = givenDate.startOf('week').toISODate()
+  const firstDate = givenDate.startOf('month').toISODate()
+  console.log('first date of month: ', firstDate)
 
-  /*
-  const url = `http://192.168.68.119:3000/energy/daily/${monday}`
+  const url = `${Constants.expoConfig.extra.server_uri}/month/${firstDate}`
 
-
-  const url = `http://82.128.129.121:3000/energy/daily/${monday}`
-  */
-
-  const url = `${Constants.expoConfig.extra.server_uri}/daily/${monday}`
-
-  const fetchDailyData = async () => {
-    if (dataCache.current[monday]) {
-      setDailyData(dataCache.current[monday])
+  const fetchMonthData = async () => {
+    if (dataCache.current[firstDate]) {
+      setMonthData(dataCache.current[firstDate])
       return
     }
 
@@ -39,9 +33,9 @@ const useDailyData = (date) => {
       }
 
       const json = await response.json()
-      dataCache.current[monday] = json
+      dataCache.current[firstDate] = json
 
-      setDailyData(json)
+      setMonthData(json)
     } catch (error) {
       console.error('Fecth exception:', error)
     } finally {
@@ -50,10 +44,10 @@ const useDailyData = (date) => {
   }
 
   useEffect(() => {
-    fetchDailyData()
-  }, [monday])
+    fetchMonthData()
+  }, [firstDate])
 
-  return { dailyData, loading }
+  return { monthData, loading }
 }
 
-export default useDailyData
+export default useMonthData
