@@ -8,6 +8,7 @@ import CalBar from './CalBar'
 import DayCalendar from './DayCalendar'
 import ChartByDay from './ChartByDay'
 import ChartByMonth from './ChartByMonth'
+import ChartByYear from './ChartByYear'
 import Label from './Label'
 import theme from '../theme'
 
@@ -42,6 +43,13 @@ const Main = () => {
         />
       )}
       {calendarMode === 'Month' && <ChartByMonth date={selectedDate} />}
+      {calendarMode === 'Year' && (
+        <ChartByYear
+          date={selectedDate}
+          setEnergyFlow={setEnergyFlow}
+          setLabelVisible={setLabelVisible}
+        />
+      )}
       <CalBar calendarMode={calendarMode} setCalendarMode={setCalendarMode} />
       <DayCalendar
         today={today}

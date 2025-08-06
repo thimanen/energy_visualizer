@@ -2,20 +2,20 @@ import { useState, useEffect, useRef } from 'react'
 import { DateTime } from 'luxon'
 import Constants from 'expo-constants'
 
-const useMonthData = (date) => {
-  const [monthData, setMonthData] = useState([])
+const useYearData = (date) => {
+  const [yearData, setYearData] = useState([])
   const [loading, setLoading] = useState(false)
   const dataCache = useRef({})
 
   //make sure the given date is the first date of the month, and if not, make it the first (of the same month)
   const givenDate = DateTime.fromISO(date, { zone: 'Europe/Helsinki' })
-  const firstDate = givenDate.startOf('month').toISODate()
-  
-  const url = `${Constants.expoConfig.extra.server_uri}/month/${firstDate}`
+  const firstDate = givenDate.startOf('year').toISODate()
+    
+  const url = `${Constants.expoConfig.extra.server_uri}/year/${firstDate}`
 
-  const fetchMonthData = async () => {
+  const fetchYearData = async () => {
     if (dataCache.current[firstDate]) {
-      setMonthData(dataCache.current[firstDate])
+      setYearData(dataCache.current[firstDate])
       return
     }
 
@@ -34,7 +34,7 @@ const useMonthData = (date) => {
       const json = await response.json()
       dataCache.current[firstDate] = json
 
-      setMonthData(json)
+      setYearData(json)
     } catch (error) {
       console.error('Fecth exception:', error)
     } finally {
@@ -43,10 +43,10 @@ const useMonthData = (date) => {
   }
 
   useEffect(() => {
-    fetchMonthData()
+    fetchYearData()
   }, [firstDate])
 
-  return { monthData, loading }
+  return { yearData, loading }
 }
 
-export default useMonthData
+export default useYearData

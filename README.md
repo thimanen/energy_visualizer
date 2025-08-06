@@ -31,3 +31,4 @@ Compile app with: eas build --platform android --profile preview
 |12.7.|4|73|Create fillMissingTimestamps - function to make mains and solar arrays the same size and fill missing timestamps with zero values. Nt nice, but now able to draw the graph. | implement on server side mechanism to re-try failed fetch|
 |2.8.|2|75|Draw icons for the detailed energy flow view (the bar label) and round up to two decimals| implement serve side for monthly and yearly views|
 |4.8.|5|80|Implemented view for monthly flows. A bit cramped, but working...|yearly view next|
+|7.8.|5|85|Implemented view for current year.||
