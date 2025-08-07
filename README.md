@@ -2,7 +2,9 @@
 ## Project goal
 The project will implement a mobile application to visualise energy flows provided by the energy meter server. The mobile application will provide views for the amount of instantaneous energy flows as well as views for historical energy flows.
 
-The objective is to create a mobile application with React Native and EXPO framework to request and present hourly/daily/weekly/monthly/yearly energy flows. The aim is to provide graphical visualization both to current power and historical energy flows. Since the energy meter system will operate inside a local network which is not exposed externally (no public IP address), the mobile application will use the free hosted MongoDB database directly to fetch historical data. Presentation of current data is only possible within local network.
+The objective is to create a mobile application with React Native and EXPO framework to request and present hourly/daily/weekly/monthly/yearly energy flows. The aim is to provide graphical visualization both to current power and historical energy flows. The energy visualizer uses the energy_meter server REST API for all requests. The route for the data is /energy/now, /energy/hourly/:date, /energy/daily/:date, /energy/month/:date, /energy/year/:date
+
+The mobile application shows also the current weather (temperature and weather icon) as well as current (/energy/now) energy production by the solar panels.
 
 Compile app with: eas build --platform android --profile preview
 
@@ -32,4 +34,4 @@ Compile app with: eas build --platform android --profile preview
 |2.8.|2|75|Draw icons for the detailed energy flow view (the bar label) and round up to two decimals| implement serve side for monthly and yearly views|
 |4.8.|5|80|Implemented view for monthly flows. A bit cramped, but working...|yearly view next|
 |7.8.|5|85|Implemented view for current year.||
-|7.8.|1|86|New icon and theme modification||
+|7.8.|3|88|New icon and theme modification. Fine tuning||
