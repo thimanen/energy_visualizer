@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
 const Title = () => {
   return (
     <View style={styles.flexContainer}>
-      <Text style={styles.textStyle}>Energy Flow Visualizer</Text>
+      <Text style={styles.textStyle}>EFlowViz</Text>
     </View>
   )
 }

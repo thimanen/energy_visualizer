@@ -11,22 +11,11 @@ import Current from './Current'
 import theme from '../theme'
 
 const PlantData = () => {
-  const openInGoogleMaps = async () => {
-    const url =
-      'https://www.google.com/maps/place/Hevosmiehentie+19,+90420+Oulu/'
-    const supported = await Linking.canOpenURL(url)
-    if (supported) {
-      await Linking.openURL(url)
-    }
-  }
+
 
   return (
     <View style={styles.flexContainer}>
-      <Pressable onPress={openInGoogleMaps}>
-        <View style={styles.addressContainer}>
-          <Text style={styles.addressText}>Hevosmiehentie 19, Oulu</Text>
-        </View>
-      </Pressable>
+      
       <View style={{ overflow: 'hidden' }}>
         <ImageBackground
           source={require('../../images/plant.jpg')}
@@ -41,11 +30,11 @@ const PlantData = () => {
             </View>
             <View style={styles.imageBottomRow}>
               <View style={styles.weatherIcon}>
-                <Text>This month kWh</Text>
+                
               </View>
 
               <View style={styles.weatherTemp}>
-                <Text>All time kWh</Text>
+                
               </View>
             </View>
           </View>

@@ -55,7 +55,7 @@ const ChartByYear = ({ date, setEnergyFlow, setLabelVisible }) => {
 
     setTimeout(() => {
       setLabelVisible(false)
-    }, 2000)
+    }, 5000)
   }
 
   useEffect(() => {

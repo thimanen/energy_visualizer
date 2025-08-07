@@ -8,9 +8,9 @@ const theme = {
   },
   titleColors: {
     backgroundColor: '#FFFDF6',
-    textColor: '#3D5300',
-    textColorAlt: '#FFF8DC',
-    fontSize: 18,
+    textColor: '#D3AF37',
+    textColorAlt: '#FFD700',
+    fontSize: 24,
     fontWeight: 'bold',
   },
   addressColors: {
@@ -19,10 +19,15 @@ const theme = {
     fontSize: 12,
     fontWeight: 'normal',
   },
-  calendarColors: {
+  calendarColors_2: {
     cardBackground: '#EEEEEE',
     cardSelectHigh: '#6146c6',
     cardSelectedLow: '#cfcefc',
+  },
+  calendarColors: {
+    cardBackground: '#FCF8DD',
+    cardSelectHigh: '#FFD700',
+    cardSelectedLow: '#D3AF37',
   },
 }
 

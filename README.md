@@ -32,3 +32,4 @@ Compile app with: eas build --platform android --profile preview
 |2.8.|2|75|Draw icons for the detailed energy flow view (the bar label) and round up to two decimals| implement serve side for monthly and yearly views|
 |4.8.|5|80|Implemented view for monthly flows. A bit cramped, but working...|yearly view next|
 |7.8.|5|85|Implemented view for current year.||
+|7.8.|1|86|New icon and theme modification||
