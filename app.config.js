@@ -7,7 +7,7 @@ export default {
     version: '1.0.0',
     platforms: ['android'],
     orientation: 'portrait',
-    icon: './assets/play_store_512.png',
+    icon: './assets/icon.png',
     userInterfaceStyle: 'light',
     newArchEnabled: true,
     splash: {
