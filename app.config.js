@@ -2,8 +2,8 @@ import 'dotenv/config'
 
 export default {
   expo: {
-    name: 'energy_visualizer',
-    slug: 'energy_visualizer',
+    name: 'EFlowViz',
+    slug: 'energy-visualizer',
     version: '1.0.0',
     platforms: ['android'],
     orientation: 'portrait',
@@ -11,7 +11,7 @@ export default {
     userInterfaceStyle: 'light',
     newArchEnabled: true,
     splash: {
-      image: './assets/splash-icon.png',
+      image: './assets/icon.png',
       resizeMode: 'contain',
       backgroundColor: '#ffffff',
     },
@@ -20,11 +20,11 @@ export default {
     },
     android: {
       adaptiveIcon: {
-        foregroundImage: './assets/adaptive-icon.png',
+        foregroundImage: './assets/icon.png',
         backgroundColor: '#ffffff',
       },
       edgeToEdgeEnabled: true,
-      package: 'com.thimanen.energy_visualizer',
+      package: 'com.thimanen.energyvisualizer',
       usesCleartextTraffic: true,
     },
     web: {
