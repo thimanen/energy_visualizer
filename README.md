@@ -35,3 +35,4 @@ Compile app with: eas build --platform android --profile preview
 |4.8.|5|80|Implemented view for monthly flows. A bit cramped, but working...|yearly view next|
 |7.8.|5|85|Implemented view for current year.||
 |7.8.|3|88|New icon and theme modification. Fine tuning||
+|8.8.|2|90|Finetuning the icon and build process||
