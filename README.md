@@ -36,3 +36,4 @@ Compile app with: eas build --platform android --profile preview
 |7.8.|5|85|Implemented view for current year.||
 |7.8.|3|88|New icon and theme modification. Fine tuning||
 |8.8.|2|90|Finetuning the icon and build process||
+|8.8.|5|95|Implemented a button for statistics. Pressing the button toggles stats ON/OFF. Statistics are not implemented yet, but a placeholder for one line stats. Adding the stats does not move the graphs up nor down|Implement actual statistics read operation. Implement statistics route on server side|

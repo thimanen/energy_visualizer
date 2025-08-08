@@ -3,7 +3,7 @@ import 'dotenv/config'
 export default {
   expo: {
     name: 'EFlowViz',
-    slug: 'energy-visualizer',
+    slug: 'energy_visualizer',
     version: '1.0.0',
     platforms: ['android'],
     orientation: 'portrait',

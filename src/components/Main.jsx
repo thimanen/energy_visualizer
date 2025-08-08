@@ -11,6 +11,7 @@ import ChartByMonth from './ChartByMonth'
 import ChartByYear from './ChartByYear'
 import Label from './Label'
 import theme from '../theme'
+import Statistics from './Statistics'
 
 const styles = StyleSheet.create({
   container: {
@@ -28,11 +29,13 @@ const Main = () => {
   const [selectedDate, setSelectedDate] = useState(DateTime.local().toISODate())
   const [energyFlow, setEnergyFlow] = useState({})
   const [labelVisible, setLabelVisible] = useState(false)
+  const [detailViewMode, setDetailViewMode] = useState(false)
 
   return (
     <View style={styles.container}>
       <Title />
       <PlantData />
+      <Statistics detailViewMode={detailViewMode} />
       <Label energyFlow={energyFlow} labelVisible={labelVisible} />
       {calendarMode === 'Day' && <ChartByHour date={selectedDate} />}
       {calendarMode === 'Week' && (
@@ -50,7 +53,12 @@ const Main = () => {
           setLabelVisible={setLabelVisible}
         />
       )}
-      <CalBar calendarMode={calendarMode} setCalendarMode={setCalendarMode} />
+      <CalBar
+        calendarMode={calendarMode}
+        setCalendarMode={setCalendarMode}
+        detailViewMode={detailViewMode}
+        setDetailViewMode={setDetailViewMode}
+      />
       <DayCalendar
         today={today}
         onSelectDate={setSelectedDate}
