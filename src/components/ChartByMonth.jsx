@@ -25,7 +25,7 @@ const formatEnergyDataForStackedChartPerDay = (data) => {
   return formattedData
 }
 
-const ChartByMonth = ({ date}) => {
+const ChartByMonth = ({ date }) => {
   const [energyData, setEnergyData] = useState([])
   const [selectedIndex, setSelectedIndex] = useState(null)
   const { monthData, loading } = useMonthData(date)
@@ -104,7 +104,6 @@ const ChartByMonth = ({ date}) => {
         maxValue={60000}
         mostNegativeValue={-40000}
         showStackLabels={true}
-        
       />
     </View>
   )

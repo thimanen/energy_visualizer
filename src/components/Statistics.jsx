@@ -1,8 +1,16 @@
 import { View, StyleSheet, Text } from 'react-native'
+import useStatistics from '../hooks/useStatistics'
 import theme from '../theme'
 
-const Statistics = ({ detailViewMode }) => {
+const Statistics = ({ detailViewMode, date }) => {
   if (detailViewMode) {
+    const { statData, loading } = useStatistics(date)
+
+    if (loading) return <Text>Loading data...</Text>
+    if (!statData) return <Text>No current data</Text>
+
+    console.log(statData)
+
     return (
       <View style={styles.labelContainer}>
         <Text>Statistics</Text>
