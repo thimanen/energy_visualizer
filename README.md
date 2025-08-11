@@ -38,3 +38,4 @@ Compile app with: eas build --platform android --profile preview
 |8.8.|2|90|Finetuning the icon and build process||
 |8.8.|5|95|Implemented a button for statistics. Pressing the button toggles stats ON/OFF. Statistics are not implemented yet, but a placeholder for one line stats. Adding the stats does not move the graphs up nor down|Implement actual statistics read operation. Implement statistics route on server side|
 |10.8.|3|98|Statistics are now fetched via useStatistics.|Implement the statistics view on the main screen|
+|11.8.|5|103|Statistics for all time values shown on main screen if Stat-button is pressed. Had to struggle with hooks and rendering. Also the graphs shift if stats is ON or OFF. Not nice...|Fix jumping graphs, and shows statistics for current year and current month|

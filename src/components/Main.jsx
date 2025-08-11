@@ -35,7 +35,7 @@ const Main = () => {
     <View style={styles.container}>
       <Title />
       <PlantData />
-      <Statistics detailViewMode={detailViewMode} date={selectedDate} />
+      {detailViewMode && <Statistics detailViewMode={detailViewMode} date={selectedDate} />}
       <Label energyFlow={energyFlow} labelVisible={labelVisible} />
       {calendarMode === 'Day' && <ChartByHour date={selectedDate} />}
       {calendarMode === 'Week' && (

@@ -69,7 +69,9 @@ const ChartByHour = ({ date }) => {
   }
 
   return (
-    <View style={{ backgroundColor: theme.chartColors.backgroundColor, padding: 5 }}>
+    <View
+      style={{ backgroundColor: theme.chartColors.backgroundColor, padding: 5 }}
+    >
       <BarChart
         stackData={energyData}
         width={Dimensions.get('window').width - 10}

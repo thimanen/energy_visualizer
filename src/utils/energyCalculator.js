@@ -89,4 +89,25 @@ const computeEnergyFlows = (inputMains, inputSolar) => {
   return result
 }
 
+const computeEnergyFlowsForTotals = (mainsTotals, solarTotals) => {
+  console.log(mainsTotals)
+  console.log(solarTotals)
+  const solarProduced = roundToFour(solarTotals.total_act_energy)
+  const solarSold = roundToFour(mainsTotals.total_act_ret_energy)
+  const mainsBought = roundToFour(mainsTotals.total_act_energy)
+  const solarUsed = roundToFour(solarProduced - solarSold)
+  const totalConsumption = roundToFour(mainsBought + solarUsed)
+  const netFlow = roundToFour(mainsBought - solarSold)
+
+  return {
+    solarProduced,
+    solarSold,
+    mainsBought,
+    solarUsed,
+    totalConsumption,
+    netFlow,
+  }
+}
+
 export default computeEnergyFlows
+export { computeEnergyFlowsForTotals }
