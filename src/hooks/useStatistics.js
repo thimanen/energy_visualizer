@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import { DateTime } from 'luxon'
 import Constants from 'expo-constants'
 
-const useStatistics = (date) => {
+const useStatistics = (date, detailViewMode) => {
   const [statData, setStatData] = useState([])
   const [loading, setLoading] = useState(false)
   const dataCache = useRef({})
@@ -14,37 +14,42 @@ const useStatistics = (date) => {
   const url = `${Constants.expoConfig.extra.server_uri}/stat/${firstDate}`
 
   const fetchStatData = async () => {
-    if (dataCache.current[firstDate]) {
-      setStatData(dataCache.current[firstDate])
-      return
-    }
-
-    setLoading(true)
-
-    try {
-      const response = await fetch(url)
-      if (!response.ok) {
-        console.error(`Fetch error: ${response.status} ${response.statusText}`)
-        const errorText = await response.text()
-        console.error(`Server response: ${errorText}`)
-        setLoading(false)
+    if (detailViewMode) {
+      if (dataCache.current[firstDate]) {
+        setStatData(dataCache.current[firstDate])
         return
       }
 
-      const json = await response.json()
-      dataCache.current[firstDate] = json
+      setLoading(true)
 
-      setStatData(json)
-    } catch (error) {
-      console.error('Fecth exception:', error)
-    } finally {
-      setLoading(false)
+      try {
+        const response = await fetch(url)
+        if (!response.ok) {
+          console.error(
+            `Fetch error: ${response.status} ${response.statusText}`
+          )
+          const errorText = await response.text()
+          console.error(`Server response: ${errorText}`)
+          setLoading(false)
+          return
+        }
+
+        const json = await response.json()
+
+        dataCache.current[firstDate] = json
+
+        setStatData(json)
+      } catch (error) {
+        console.error('Fecth exception:', error)
+      } finally {
+        setLoading(false)
+      }
     }
   }
 
   useEffect(() => {
     fetchStatData()
-  }, [firstDate])
+  }, [firstDate, detailViewMode])
 
   return { statData, loading }
 }

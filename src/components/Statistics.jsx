@@ -10,9 +10,9 @@ const roundUpToMega = (power) => {
   return Math.round(mega * 100) / 100
 }
 const Statistics = ({ detailViewMode, date }) => {
-  const { statData, loading } = useStatistics(date)
+  const { statData, loading } = useStatistics(date, detailViewMode)
   const [energyFlow, setEnergyFlow] = useState(null)
-
+  
   useEffect(() => {
     if (statData && statData.allTime && statData.allTime.length > 0) {
       const solarDataAllTime = statData.allTime.filter(
@@ -38,30 +38,39 @@ const Statistics = ({ detailViewMode, date }) => {
   if (!statData) return <Text>No current data</Text>
   if (!energyFlow) return <Text>No energy data available</Text>
   
-  return (
-    <View style={styles.labelContainer}>
-      <Text>All time:</Text>
-      <MaterialCommunityIcons
-        name="transmission-tower-export"
-        size={20}
-        color="black"
-      />
-      <Text> {roundUpToMega(energyFlow.mainsBought)} MW </Text>
 
-      <MaterialCommunityIcons name="solar-power" size={20} color="black" />
-      <Text>
-        {' '}
-        {roundUpToMega(energyFlow.solarUsed + energyFlow.solarSold)} MW{' '}
-      </Text>
+  if (detailViewMode) {
+    return (
+      <View style={styles.labelContainer}>
+        <Text>All time:</Text>
+        <MaterialCommunityIcons
+          name="transmission-tower-export"
+          size={20}
+          color="black"
+        />
+        <Text> {roundUpToMega(energyFlow.mainsBought)} MW </Text>
 
-      <MaterialCommunityIcons
-        name="transmission-tower-import"
-        size={20}
-        color="black"
-      />
-      <Text> {roundUpToMega(energyFlow.solarSold)} MW</Text>
-    </View>
-  )
+        <MaterialCommunityIcons name="solar-power" size={20} color="black" />
+        <Text>
+          {' '}
+          {roundUpToMega(energyFlow.solarUsed + energyFlow.solarSold)} MW{' '}
+        </Text>
+
+        <MaterialCommunityIcons
+          name="transmission-tower-import"
+          size={20}
+          color="black"
+        />
+        <Text> {roundUpToMega(energyFlow.solarSold)} MW</Text>
+      </View>
+    )
+  } else {
+    return (
+      <View style={styles.labelContainer}>
+        <Text style={styles.hiddenTextStyle}>This label is not visiblel</Text>
+      </View>
+    )
+  }
 }
 export default Statistics
 

@@ -3,7 +3,8 @@ import { MaterialCommunityIcons } from '@expo/vector-icons'
 import theme from '../theme'
 
 const roundUp = (power) => {
-  return Math.round(power * 100) / 100
+  const kilo = power / 1000
+  return Math.round(kilo * 100) / 100
 }
 
 const Label = ({ energyFlow, labelVisible }) => {
@@ -15,17 +16,17 @@ const Label = ({ energyFlow, labelVisible }) => {
           size={20}
           color="black"
         />
-        <Text> {roundUp(energyFlow.mainsBought)} W </Text>
+        <Text> {roundUp(energyFlow.mainsBought)} kW </Text>
 
         <MaterialCommunityIcons name="solar-power" size={20} color="black" />
-        <Text> {roundUp(energyFlow.solarUsed + energyFlow.solarSold)} W </Text>
+        <Text> {roundUp(energyFlow.solarUsed + energyFlow.solarSold)} kW </Text>
 
         <MaterialCommunityIcons
           name="transmission-tower-import"
           size={20}
           color="black"
         />
-        <Text> {roundUp(energyFlow.solarSold)} W</Text>
+        <Text> {roundUp(energyFlow.solarSold)} kW</Text>
       </View>
     )
   } else {
